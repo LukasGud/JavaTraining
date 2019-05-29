@@ -15,8 +15,11 @@ public class ArraySum {
         for (int i = 0; i <= numbersArray.length - 1; i++) {
             System.out.print("Enter No. " + (i + 1) + ": ");
             numbersArray[i] = sc.nextInt();
+        }
+        for (int i = 0; i <= numbersArray.length - 1; i++) {
             sumOfArray += numbersArray[i];
         }
         System.out.println("Sum of these numbers is: " + sumOfArray);
     }
 }
+//Pakeisti kad naudotu areju sudeciai. antras foras turi buti

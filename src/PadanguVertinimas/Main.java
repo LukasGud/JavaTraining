@@ -1,52 +1,58 @@
 package PadanguVertinimas;
 
+import PadanguVertinimas.Exceptions.UnsuitableTireTypeException;
+import PadanguVertinimas.Repository.Tire;
+import PadanguVertinimas.Repository.TireEvaluationResult;
+import PadanguVertinimas.Repository.TireEvaluator;
+import PadanguVertinimas.CarServiceDomain.AutoMinuteTireEvaluator;
+import PadanguVertinimas.CarServiceDomain.AutoPliusTireEvaluator;
+import PadanguVertinimas.CarServiceDomain.TireMichellin;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        PadangosVertintojas jonas = new AutoMinutePadangosVertintojas();
+        TireEvaluator john = new AutoMinuteTireEvaluator();
 
-        PadangosVertintojas genadijus = new AutoPliusPadangosVertintojas();
+        TireEvaluator jim = new AutoPliusTireEvaluator();
 
-        // Masina audi = new Masina("Sedanas", 4, 0.3, "14", "vasarine");
-        //Masina volvo = new Masina("universalas", 4, 0.5, "16", "ziemine");
-        // Masina bmw = new Masina("hecbekas", 4, 0.5, "15", "vasarine");
+        TireMichellin silverstone = new TireMichellin(0.4, 14, Tire.TYPES.SUMMER);
 
-        PadangaMichellin silverstone = new PadangaMichellin(0.4, 14, Padanga.TIPAI.VASARINE);
+        TireMichellin zetum = new TireMichellin(0.2, 17, Tire.TYPES.WINTER);
 
-        PadangaMichellin zetum = new PadangaMichellin(0.2, 17, Padanga.TIPAI.ZIEMINE);
+        TireMichellin goodYear = new TireMichellin(0.5, 16, Tire.TYPES.WINTER);
 
-        PadangaMichellin goodYear = new PadangaMichellin(0.5, 16, Padanga.TIPAI.ZIEMINE);
+        TireMichellin michellin = new TireMichellin(0.5, 15, Tire.TYPES.WINTER);
 
-        PadangaMichellin michellin = new PadangaMichellin(0.5, 15, Padanga.TIPAI.ZIEMINE);
+        List<Tire> bundleOfTires = new ArrayList();
 
-        List<Padanga> padanguKomplektas = new ArrayList();
-        padanguKomplektas.add(silverstone);
-        padanguKomplektas.add(zetum);
-        padanguKomplektas.add(goodYear);
-        padanguKomplektas.add(michellin);
-        //System.out.println(Arrays.toString(padanguKomplektas.toArray()));
-        padanguKomplektas.forEach(System.out::println);
-        boolean padangaTinkama = false;
+        bundleOfTires.add(silverstone);
+        bundleOfTires.add(zetum);
+        bundleOfTires.add(goodYear);
+        bundleOfTires.add(michellin);
+
+        bundleOfTires.forEach(System.out::println);
+        boolean tireChecksOut = false;
+        TireEvaluationResult tireEvaluationResult = null;
 
         try {
-            jonas.tikrintiPateikiantRezultata(silverstone);
-            padangaTinkama = jonas.tikrinti(padanguKomplektas);
+            tireEvaluationResult = john.checkByProvidingResult(silverstone);
+            tireChecksOut = john.checkTire(bundleOfTires);
 
-        } catch (NetinkamasPadangosTipasException e) {
+        } catch (UnsuitableTireTypeException e) {
             System.out.println("Jusu padangos tipas netikrinamas musu imoneje");
             try {
-                padangaTinkama = genadijus.tikrinti(padanguKomplektas);
-            } catch (NetinkamasPadangosTipasException e1) {
+                tireChecksOut = jim.checkTire(bundleOfTires);
+            } catch (UnsuitableTireTypeException e1) {
                 System.out.println("Jusu padangos tipas netikrinamas musu imoneje");
             }
 
         } finally {
-            System.out.println("Jusu padanga servise yra: " + (padangaTinkama ? "tinkama" : "netinkama"));
+            System.out.println("Jusu padanga servise yra: " + (tireChecksOut ? "tinkama" : "netinkama"));
+            System.out.println(tireEvaluationResult);
 
         }
 

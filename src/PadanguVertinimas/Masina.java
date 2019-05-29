@@ -1,14 +1,16 @@
 package PadanguVertinimas;
 
-public class Masina implements Padanga {
+import PadanguVertinimas.Repository.Tire;
+
+public class Masina implements Tire {
 
     private String kebuloTipas;
     private int ratai;
     private double protektoriausGylis;
     private int padangosDiametras;
-    private TIPAI padangosTipas;
+    private TYPES padangosTipas;
 
-    public Masina(String kebuloTipas, int ratai, double protektoriausGylis, int padangosDiametras, TIPAI padangosTipas) {
+    public Masina(String kebuloTipas, int ratai, double protektoriausGylis, int padangosDiametras, TYPES padangosTipas) {
         this.kebuloTipas = kebuloTipas;
         this.ratai = ratai;
         this.protektoriausGylis = protektoriausGylis;
@@ -25,17 +27,17 @@ public class Masina implements Padanga {
     }
 
     @Override
-    public double protektoriausGylis() {
+    public double treadDepthOfTire() {
         return protektoriausGylis;
     }
 
     @Override
-    public int padangosDiametras() {
+    public int diameterOfTire() {
         return padangosDiametras;
     }
 
     @Override
-    public TIPAI padangosTipas() {
+    public TYPES typeOfTire() {
         return padangosTipas;
     }
 }
