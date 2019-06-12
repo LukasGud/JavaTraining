@@ -21,14 +21,14 @@ public class AutoPliusTireEvaluator implements TireEvaluator {
     }
 
     @Override
-    public boolean checkTire(List<Tire> padangos) throws UnsuitableTireTypeException {
-        for (Tire p: padangos) {
-            if (checkTire(p)){
+    public boolean checkTire(List<Tire> tires) throws UnsuitableTireTypeException {
+        for (Tire p : tires) {
+            if (checkTire(p)) {
                 return false;
             }
 
         }
-       return true;
+        return true;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AutoPliusTireEvaluator implements TireEvaluator {
     }
 
     @Override
-    public List<TireEvaluationResult> catalogOfCheckedTires(List<Tire> padangos) throws UnsuitableTireTypeException {
+    public List<TireEvaluationResult> checkByProvidingResults(List<Tire> tires) throws UnsuitableTireTypeException {
         return null;
     }
 

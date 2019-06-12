@@ -22,7 +22,7 @@ public class LauzynasTireEvaluator implements TireEvaluator {
     }
 
     @Override
-    public boolean checkTire(List<Tire> tire) throws UnsuitableTireTypeException {
+    public boolean checkTire(List<Tire> tires) throws UnsuitableTireTypeException {
         return false;
     }
 
@@ -32,7 +32,7 @@ public class LauzynasTireEvaluator implements TireEvaluator {
     }
 
     @Override
-    public List<TireEvaluationResult> catalogOfCheckedTires(List<Tire> padangos) throws UnsuitableTireTypeException {
+    public List<TireEvaluationResult> checkByProvidingResults(List<Tire> tires) throws UnsuitableTireTypeException {
         return null;
     }
 

@@ -9,11 +9,11 @@ public interface TireEvaluator {
 
     boolean checkTire(Tire tire) throws UnsuitableTireTypeException;
 
-    boolean checkTire(List<Tire> padangos) throws UnsuitableTireTypeException;
+    boolean checkTire(List<Tire> tires) throws UnsuitableTireTypeException;
 
     TireEvaluationResult checkByProvidingResult(Tire tire) throws UnsuitableTireTypeException;
 
-    List<TireEvaluationResult> catalogOfCheckedTires(List<Tire> padangos) throws UnsuitableTireTypeException;
+    List<TireEvaluationResult> checkByProvidingResults(List<Tire> tires) throws UnsuitableTireTypeException;
 
 
 }

@@ -40,6 +40,6 @@ public class DefaultTireEvaluationResult implements TireEvaluationResult {
 
     @Override
     public String toString() {
-        return "Your tire: " + checkedTire + "\n  " + (checkIfTirePassesRequirements ? "Passes" : "Fails") + "\nNotes: " + notesOnCheckedTire;
+        return "\nJusu padanga: " + checkedTire + "\n  " + (checkIfTirePassesRequirements ? "Tinkama" :"Netinkama") + "\nNotes: " + notesOnCheckedTire;
     }
 }

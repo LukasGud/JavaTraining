@@ -5,7 +5,10 @@ import PadanguVertinimas.Repository.Tire;
 import PadanguVertinimas.Repository.TireEvaluationResult;
 import PadanguVertinimas.Repository.TireEvaluator;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class AutoMinuteTireEvaluator implements TireEvaluator {
 
@@ -13,14 +16,14 @@ public class AutoMinuteTireEvaluator implements TireEvaluator {
     @Override
     public boolean checkTire(Tire tire) throws UnsuitableTireTypeException {
 
-        return !checkInDetail(tire).isMeetsTheRequirements();
+        return !checkInDetail(tire).MeetsTheRequirements();
     }
 
 
     @Override
-    public boolean checkTire(List<Tire> padangos) throws UnsuitableTireTypeException {
+    public boolean checkTire(List<Tire> tires) throws UnsuitableTireTypeException {
 
-        for (Tire p : padangos) {
+        for (Tire p : tires) {
             if (checkTire(p)) {
                 return false;
             }
@@ -34,8 +37,8 @@ public class AutoMinuteTireEvaluator implements TireEvaluator {
 
 
         try {
-            PadangosSavybe tireMeetsRequirements = checkInDetail(tire);
-            return new DefaultTireEvaluationResult(tire, tireMeetsRequirements.isMeetsTheRequirements(), tireMeetsRequirements.getPastabos());
+            TireFeatures tireMeetsRequirements = checkInDetail(tire);
+            return new DefaultTireEvaluationResult(tire, tireMeetsRequirements.MeetsTheRequirements(), tireMeetsRequirements.getNotes());
 
         } catch (UnsuitableTireTypeException e) {
 
@@ -47,18 +50,34 @@ public class AutoMinuteTireEvaluator implements TireEvaluator {
     }
 
     @Override
-    public List<TireEvaluationResult> catalogOfCheckedTires(List<Tire> padangos) throws UnsuitableTireTypeException {
+    public List<TireEvaluationResult> checkByProvidingResults(List<Tire> tires) throws UnsuitableTireTypeException {
 
-        return null;
+        LinkedList<TireEvaluationResult> returnedResult = new LinkedList<>();
+        for (Tire checkedTires : tires) {
+           returnedResult.add(checkByProvidingResult(checkedTires));
+        }
+            printCatalog(returnedResult);
+
+
+        return returnedResult;
     }
-    private PadangosSavybe checkInDetail(Tire tire) throws UnsuitableTireTypeException {
+
+    private static void printCatalog(LinkedList<TireEvaluationResult> linkedList) {
+        Iterator<TireEvaluationResult> i = linkedList.iterator();
+        while (i.hasNext()) {
+            System.out.println("\nChecked tires: " + i.next());
+        }
+        System.out.println("================================");
+    }
+
+    private TireFeatures checkInDetail(Tire tire) throws UnsuitableTireTypeException {
 
         if (Tire.TYPES.WINTER == tire.typeOfTire()) {
             if (tire.treadDepthOfTire() > 0.3) {
-                return new PadangosSavybe(true, "");
+                return new TireFeatures(true, "");
             }
 
-            return new PadangosSavybe(false, "Protektoriaus gylis yra mazesnis negu reikalaujama musu servise. Turi buti daugiau negu 0.3");
+            return new TireFeatures(false, "Protektoriaus gylis yra mazesnis negu reikalaujama musu servise. Turi buti daugiau negu 0.3");
 
         }
 
@@ -67,23 +86,23 @@ public class AutoMinuteTireEvaluator implements TireEvaluator {
 
     }
 
-    private class PadangosSavybe {
+    private class TireFeatures {
 
         private final boolean meetsTheRequirements;
         private final String notesOnTire;
 
 
-        public PadangosSavybe(boolean meetsTheRequirements, String notesOnTire) {
+        public TireFeatures(boolean meetsTheRequirements, String notesOnTire) {
             this.meetsTheRequirements = meetsTheRequirements;
             this.notesOnTire = notesOnTire;
         }
 
-        public boolean isMeetsTheRequirements() {
+        public boolean MeetsTheRequirements() {
             return meetsTheRequirements;
         }
 
 
-        public String getPastabos() {
+        public String getNotes() {
             return notesOnTire;
         }
 

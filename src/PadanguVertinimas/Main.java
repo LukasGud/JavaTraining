@@ -27,25 +27,28 @@ public class Main {
 
         TireMichellin michellin = new TireMichellin(0.5, 15, Tire.TYPES.WINTER);
 
-        List<Tire> bundleOfTires = new ArrayList();
+        List<Tire> bundleOfTires = new ArrayList<>();
 
         bundleOfTires.add(silverstone);
         bundleOfTires.add(zetum);
         bundleOfTires.add(goodYear);
         bundleOfTires.add(michellin);
 
-        bundleOfTires.forEach(System.out::println);
+        //bundleOfTires.forEach(System.out::println);
         boolean tireChecksOut = false;
         TireEvaluationResult tireEvaluationResult = null;
 
         try {
+            john.checkByProvidingResults(bundleOfTires);
             tireEvaluationResult = john.checkByProvidingResult(silverstone);
             tireChecksOut = john.checkTire(bundleOfTires);
+
 
         } catch (UnsuitableTireTypeException e) {
             System.out.println("Jusu padangos tipas netikrinamas musu imoneje");
             try {
                 tireChecksOut = jim.checkTire(bundleOfTires);
+
             } catch (UnsuitableTireTypeException e1) {
                 System.out.println("Jusu padangos tipas netikrinamas musu imoneje");
             }

@@ -54,7 +54,7 @@ public class Demo {
         return true;
     }
 
-    private static void visit(LinkedList cities) {
+    private static void visit(LinkedList<String> cities) {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         boolean goingForward = true;
